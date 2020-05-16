@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<!--- put this in head-->
+<head>
+<!-- docs: jaames/iro.js -->
+	<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+	<style type="text/css">
+
+		body {
+		  color: #fff;
+		  background: #171F30;
+		  font-family: Arial, Helvetica, sans-serif;
+		    line-height: 150%;
+
+		}
+
+		.wrapper svg {
+		}
+
+		.wrap {
+		  max-width: 720px;
+		  margin: 0 auto;
+		  display: grid;
+		  flex-direction: row;
+		  align-items: center;
+		  justify-content: center;
+		  	  }
+
+		 .half {
+		    padding: 0 0;
+		
+		}
+
+
+		.colorPicker {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+
+		.title {
+			font-family: sans-serif;
+			line-height: 30px;
+			display: block;
+			padding: 10px 0;
+			font-size: 30px;
+		}
+
+
+		.half-readout {   
+			border-style: double;
+			padding: 8% 17%;
+		    width: auto;
+		    margin: 25px auto;
+		    height: auto;
+		    text-align: inherit;
+		    border-radius: 17px;
+		}
+
+
+		.readout {
+		  margin-top: 32px;
+		  font-family: monospace;
+		}
+
+		.link {
+		  margin-top: 16px;
+		  
+		 a {
+		    color: MediumSlateBlue;
+		  }
+		}
+		footer{
+		    font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
+    height: 30px;
+    line-height: 1;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: #9b9dad;
+    background: #2c303a;
+    border-top: 1px solid #444857;
+    z-index: 10;
+    font-size: 1rem;
+    }
+
+	</style>
+</head>
+<body>
+    <!-- custom handle svg -->
+    <svg style="display:none;">
+      <defs>
+        <g id="handle" stroke-width="2" >
+            <path d="M8,20.6866828 C12.9049067,16.4171007 15,12.3469645 15,8 C15,4.13400675 11.8659932,1 8,1 C4.13400675,1 1,4.13400675 1,8 C1,12.3469645 3.09509325,16.4171007 8,20.6866828 Z M8,13 C5.23857625,13 3,10.7614237 3,8 C3,5.23857625 5.23857625,3 8,3 C10.7614237,3 13,5.23857625 13,8 C13,10.7614237 10.7614237,13 8,13 Z" stroke="#FFFFFF" stroke-width="2" fill="#FFFFFF"></path>
+        </g> 
+      </defs>
+    </svg>
+    <!-- / custom handle svg -->
+    <div class="wrap">
+      <div class="half">
+        <div class="colorPicker"></div>
+      </div>
+      <div class="half-readout">
+        <span class="title">Values:</span>
+        <div id="values"></div>
+              <div class="half">
+    </div>
+
+      </div>
+    </div>
+</body>
+
+<script type="">
+	// Create a new color picker instance
+// https://iro.js.org/guide.html#Getting-Started
+var colorPicker = new iro.ColorPicker(".colorPicker", {
+  // color picker options
+  // Option guide: https://iro.js.org/guide.html#Color-Picker-Options
+  width: 280,
+  color: "rgb(255, 0, 0)",
+  borderWidth: 1,
+  borderColor: "#fff",
+  handleSvg: '#handle',
+  handleProps: {x: -8, y: -20}
+});
+
+var values = document.getElementById("values");
+
+const activeColor = document.getElementById("activeColor");
+
+
+// https://iro.js.org/guide.html#color-change
+colorPicker.on(["color:init", "color:change"], function(color){
+  // Show the current color in different formats
+  // Using the selected color: https://iro.js.org/guide.html#Using-the-Selected-Color
+  values.innerHTML = [
+    "hex:  " + color.hexString,
+    "rgb:  " + color.rgbString,
+    "hsl:  " + color.hslString,
+  ].join("<br>");
+});
+
+
+</script>
+<footer>     
+  <p>Alfa Development © 2020</p>
+</footer>
